@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/attendance_item_container"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@drawable/student_card_border">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_calendar"
+        android:background="@drawable/circle_background"
+        android:contentDescription="Icon"/>
+
+    <TextView
+        android:id="@+id/tvAttendanceTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:text="Dec 27, 2025 10:45PM"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+</LinearLayout>

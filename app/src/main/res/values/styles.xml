@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FullScreenBottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <!-- Make it full screen -->
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="behavior_peekHeight">0dp</item>
+    </style>
+</resources>

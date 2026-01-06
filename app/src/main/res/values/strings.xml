@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Student Record App</string>
+    <string name="add_student">Add Student</string>
+    <string name="add_course">Add Course</string>
+    <string name="view_students">View Students</string>
+    <string name="view_courses">View Courses</string>
+    <string name="mark_attendance">Mark Attendance</string>
+    <string name="view_attendance">View Attendance</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="sync_success">Cloud sync completed</string>
+    <string name="sync_failed">Could not sync right now. Please try again.</string>
+    <string name="no_attendance_records">No attendance records found.</string>
+    <string name="select_course_prompt">Please select a course first.</string>
+    <string name="no_students_to_mark">No students available to mark attendance.</string>
+    <string name="attendance_saved_success">Attendance saved for %1$d students</string>
+    <string name="attendance_saved_partial">Saved %1$d. Failed for %2$d.</string>
+    <string name="unknown_student">Unknown Student</string>
+    <string name="not_available">N/A</string>
+    <string name="present">Present</string>
+    <string name="absent">Absent</string>
+    <string name="change_course">Change Course</string>
+    <string name="no_enrolled_students">No enrolled students for this course yet.</string>
+</resources>

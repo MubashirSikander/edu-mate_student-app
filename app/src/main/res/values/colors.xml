@@ -1,0 +1,27 @@
+<resources>
+    <!-- App primary theme colors -->
+    <color name="primaryColor">#FF9800</color>       <!-- Orange main color -->
+    <color name="primaryVariant">#F57C00</color>
+    <color name="secondaryColor">#FFC107</color>     <!-- Amber accent -->
+    <color name="golden_dark_orange">#FF8C00</color>
+
+    <!-- Background / Text -->
+    <color name="white">#FFFFFF</color>
+    <color name="lightGray">#B0B0B0</color>
+    <color name="black">#000000</color>
+
+    <!-- Buttons -->
+    <color name="teal_700">#00796B</color>
+    <color name="purple_500">#9C27B0</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="orange_500">#FF5722</color>
+    <color name="deep_orange_400">#FF7043</color>
+
+    <!-- Network Chip -->
+    <color name="red_400">#F44336</color>           <!-- Offline -->
+    <color name="green_400">#4CAF50</color>         <!-- Online -->
+
+    <!-- Typography helpers -->
+    <color name="dark_gray">#555555</color>
+</resources>

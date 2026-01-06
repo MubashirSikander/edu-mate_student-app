@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Main content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Title + Add button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Students List"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#1F1F1F" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="12dp"
+                android:backgroundTint="#FF9800"
+                android:text="Add"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:drawableStart="@drawable/ic_plus"
+                android:drawablePadding="4dp"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="3dp"
+            android:background="#F26E11"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvStudents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:layoutAnimation="@anim/layout_animation_fall_down"/>
+
+        <!-- Empty view -->
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="No students available"
+            android:textSize="18sp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <!-- Circular loader centered on screen -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="visible"
+        android:progressTint="@color/primaryColor"/>
+</FrameLayout>
