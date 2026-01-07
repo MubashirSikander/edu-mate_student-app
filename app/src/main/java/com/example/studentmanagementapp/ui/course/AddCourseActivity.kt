@@ -138,12 +138,14 @@ class AddCourseActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                             else -> {
-                                Toast.makeText(
+                                    Toast.makeText(
                                     this,
                                     "Course saved successfully",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                finish()
+                                com.example.studentmanagementapp.utils.AdManager.showInterstitial(this@AddCourseActivity) {
+                                    finish()
+                                }
                             }
                         }
                     }
@@ -163,12 +165,14 @@ class AddCourseActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                             else -> {
-                                Toast.makeText(
+                                    Toast.makeText(
                                     this,
                                     "Course saved successfully",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                finish()
+                                com.example.studentmanagementapp.utils.AdManager.showInterstitial(this@AddCourseActivity) {
+                                    finish()
+                                }
                             }
                         }
                     }

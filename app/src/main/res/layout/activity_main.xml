@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="16dp">
+    android:background="@color/background"
+    android:fillViewport="true">
 
-    <!-- Title + Network status horizontally -->
-    <LinearLayout
-        android:id="@+id/topBar"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp">
+        android:padding="16dp">
 
+        <!-- Header Section -->
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Edu Mate Student App"
+            android:text="Edu Mate"
+            android:textAppearance="@style/TitleText"
+            android:textColor="@color/primaryColor"
             android:textSize="28sp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:letterSpacing="0.02" />
+            app:layout_constraintEnd_toStartOf="@+id/chipNetwork"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Student App"
+            android:textAppearance="@style/SubtitleText"
+            app:layout_constraintEnd_toStartOf="@+id/chipNetwork"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipNetwork"
@@ -36,135 +41,238 @@
             android:layout_height="wrap_content"
             android:text="Offline"
             android:textColor="@android:color/white"
+            app:chipBackgroundColor="@color/red_400"
             app:chipCornerRadius="16dp"
-            app:chipStrokeColor="@android:color/black"
-            app:chipStrokeWidth="1dp"
-            app:chipBackgroundColor="@color/red_400"/>
-    </LinearLayout>
+            app:chipStrokeColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSubtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
-    <!-- Buttons container -->
-    <LinearLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:spacing="16dp"
-        app:layout_constraintTop_toBottomOf="@id/topBar"
-        app:layout_constraintBottom_toTopOf="@id/tvTagline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+<!--        &lt;!&ndash; Sync Card (Hero Action) &ndash;&gt;-->
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/cardSync"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            app:cardBackgroundColor="@color/primaryVariant"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:cardElevation="4dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tvSubtitle">-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddStudent"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Add Student"
-            android:textColor="@android:color/white"
-            app:icon="@android:drawable/ic_input_add"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:backgroundTint="@color/teal_700"
-            app:cornerRadius="16dp"
-            android:elevation="6dp"/>
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="16dp">-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddCourse"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Add Course"
-            android:textColor="@android:color/white"
-            app:icon="@android:drawable/ic_input_add"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:backgroundTint="@color/purple_500"
-            app:cornerRadius="16dp"
-            android:elevation="6dp"/>
+<!--                <ImageView-->
+<!--                    android:id="@+id/ivSync"-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:src="@android:drawable/stat_notify_sync"-->
+<!--                    app:tint="@color/white"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnViewStudents"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="View Students"
-            android:textColor="@android:color/white"
-            app:icon="@android:drawable/ic_menu_view"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:backgroundTint="@color/blue_500"
-            app:cornerRadius="16dp"
-            android:elevation="6dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnViewCourses"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="View Courses"
-            android:textColor="@android:color/white"
-            app:icon="@android:drawable/ic_menu_view"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:backgroundTint="@color/green_500"
-            app:cornerRadius="16dp"
-            android:elevation="6dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMarkAttendance"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="@string/mark_attendance"
-            android:textColor="@android:color/white"
-            app:icon="@android:drawable/ic_menu_edit"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:backgroundTint="@color/orange_500"
-            app:cornerRadius="16dp"
-            android:elevation="6dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnViewAttendance"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="@string/view_attendance"
-            android:textColor="@android:color/white"
-            app:icon="@android:drawable/ic_menu_agenda"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:backgroundTint="@color/blue_500"
-            app:cornerRadius="16dp"
-            android:elevation="6dp"/>
-
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:text="Sync Data"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/tvSyncDesc"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/ivSync"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintVertical_chainStyle="packed" />-->
+<!--                -->
+<!--                <TextView-->
+<!--                    android:id="@+id/tvSyncDesc"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:text="Keep your records up to date"-->
+<!--                    android:textColor="#E0E0E0"-->
+<!--                    android:textSize="12sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/ivSync"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/ivSync"-->
+<!--                    app:layout_constraintVertical_chainStyle="packed" -->
+<!--                    app:layout_constraintVertical_bias="0.0"/>-->
+<!--                -->
+<!--                &lt;!&ndash; We need to preserve the ID btnSyncData likely being a button. -->
+<!--                     If the Logic uses `btnSyncData` OnClickListener, we should make this whole card the button -->
+<!--                     OR place a transparent button on top. -->
+<!--                     Ideally, I should change the ID of this Card to `btnSyncData` if the code casts it to View.-->
+<!--                     However, the code likely casts it to `Button`. -->
+<!--                     Safe bet: Make the card contain the button, or better, make the Card ID `btnSyncData`?-->
+<!--                     Risk: If code calls `findViewById<Button>(R.id.btnSyncData)`, it will crash if it's a CardView.-->
+<!--                     -->
+<!--                     Solution: I will use a MaterialButton for this "Hero" section too, but styled differently.-->
+<!--                &ndash;&gt;-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        </com.google.android.material.card.MaterialCardView>-->
+<!--        -->
+        <!-- Re-implementing Sync Button as an Invisible overlay OR just a big button.
+             Let's use a Big Button with iconGravity="textStart" styled like a banner. -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSyncData"
             style="@style/Widget.Material3.Button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:text="Sync Data"
-            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:backgroundTint="@color/primaryVariant"
+            app:cornerRadius="12dp"
             app:icon="@android:drawable/stat_notify_sync"
             app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:backgroundTint="@color/deep_orange_400"
-            app:cornerRadius="16dp"
-            android:elevation="6dp"/>
-    </LinearLayout>
+            app:iconPadding="12dp"
+            app:iconSize="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
 
-    <!-- Tagline at bottom -->
-    <TextView
-        android:id="@+id/tvTagline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Manage your students efficiently"
-        android:textSize="14sp"
-        android:textColor="@color/lightGray"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!-- Grid Actions -->
+        <!-- Row 1 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddStudent"
+            style="@style/Widget.Material3.Button.TonalButton"
+
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="8dp"
+            android:text="Add\nStudent"
+            android:textAlignment="center"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconGravity="top"
+            app:iconTint="@color/secondaryColor"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddCourse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSyncData" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddCourse"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="48dp"
+            android:text="Add\nCourse"
+            android:textAlignment="center"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconGravity="top"
+            app:iconTint="@color/primaryColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnAddStudent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSyncData" />
+
+        <!-- Row 2 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViewStudents"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="View\nStudents"
+            android:textAlignment="center"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_menu_view"
+            app:iconGravity="top"
+            app:iconTint="@color/secondaryColor"
+            app:layout_constraintEnd_toStartOf="@+id/btnViewCourses"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddStudent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViewCourses"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="View\nCourses"
+            android:textAlignment="center"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_menu_view"
+            app:iconGravity="top"
+            app:iconTint="@color/primaryColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnViewStudents"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddStudent" />
+
+        <!-- Row 3 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMarkAttendance"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/mark_attendance"
+            android:textAlignment="center"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:iconGravity="top"
+            app:iconTint="@color/accentColor"
+            app:layout_constraintEnd_toStartOf="@+id/btnViewAttendance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnViewStudents" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViewAttendance"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/view_attendance"
+            android:textAlignment="center"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_menu_agenda"
+            app:iconGravity="top"
+            app:iconTint="@color/accentColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnMarkAttendance"
+            app:layout_constraintTop_toBottomOf="@+id/btnViewStudents" />
+
+        <!-- Logout at bottom -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_logout"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Logout"
+            android:textColor="@color/error"
+            app:icon="@android:drawable/ic_lock_power_off"
+            app:iconTint="@color/error"
+            app:layout_constraintTop_toBottomOf="@+id/btnMarkAttendance" />
+
+        <!-- Tagline at very bottom -->
+        <TextView
+            android:id="@+id/tvTagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="Manage your students efficiently"
+            android:textColor="@color/light_gray"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/action_logout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -188,10 +188,26 @@ class FirestoreRepository(
 
     suspend fun fetchAllData(): FirestoreDataBundle {
         return runCatching {
-            val students = studentsCollection.get().await().toObjects(FirestoreStudent::class.java)
-            val courses = coursesCollection.get().await().toObjects(FirestoreCourse::class.java)
-            val enrollments = enrollmentsCollection.get().await().toObjects(FirestoreEnrollment::class.java)
-            val attendance = attendanceCollection.get().await().toObjects(FirestoreAttendance::class.java)
+            val studentDocs = studentsCollection.get().await()
+            val students = studentDocs.documents.mapNotNull { doc ->
+                doc.toObject(FirestoreStudent::class.java)?.copy(studentId = doc.id)
+            }
+
+            val courseDocs = coursesCollection.get().await()
+            val courses = courseDocs.documents.mapNotNull { doc ->
+                doc.toObject(FirestoreCourse::class.java)?.copy(courseId = doc.id)
+            }
+
+            val enrollmentDocs = enrollmentsCollection.get().await()
+            val enrollments = enrollmentDocs.documents.mapNotNull { doc ->
+                doc.toObject(FirestoreEnrollment::class.java)?.copy(enrollmentId = doc.id)
+            }
+
+            val attendanceDocs = attendanceCollection.get().await()
+            val attendance = attendanceDocs.documents.mapNotNull { doc ->
+                doc.toObject(FirestoreAttendance::class.java)?.copy(attendanceId = doc.id)
+            }
+
             FirestoreDataBundle(students, courses, enrollments, attendance)
         }.onFailure { Log.e("FirestoreFetch", "Failed to fetch data", it) }
             .getOrThrow()

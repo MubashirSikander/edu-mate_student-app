@@ -18,6 +18,24 @@
     <string name="not_available">N/A</string>
     <string name="present">Present</string>
     <string name="absent">Absent</string>
+    <string name="email">Email</string>
+    <string name="name_required">Name is required</string>
+    <string name="name_letters_only">Name should contain letters only</string>
+    <string name="password">Password</string>
+    <string name="password_required">Password required</string>
+    <string name="invalid_email">invalid email</string>
+    <string name="email_required">email required</string>
+    <string name="attendance_session_title">Attendance: </string>
+    <string name="create_account">Create Account</string>
+    <string name="pdf_saved_at">Pdf Saved At</string>
+    <string name="signup">Signup</string>
+    <string name="network_required">Network Required</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="logout">Logout</string>
+    <string name="dont_have_account">Dont have an account</string>
+    <string name="export_pdf">Export PDF</string>
+    <string name="already_have_account">Already have an account</string>
     <string name="change_course">Change Course</string>
     <string name="no_enrolled_students">No enrolled students for this course yet.</string>
 </resources>

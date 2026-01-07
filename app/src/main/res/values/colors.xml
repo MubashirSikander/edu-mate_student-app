@@ -1,27 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App primary theme colors -->
-    <color name="primaryColor">#FF9800</color>       <!-- Orange main color -->
-    <color name="primaryVariant">#F57C00</color>
-    <color name="secondaryColor">#FFC107</color>     <!-- Amber accent -->
-    <color name="golden_dark_orange">#FF8C00</color>
+    <!-- Brand Colors (Academic Blue & Teal) -->
+    <color name="primaryColor">#2563EB</color> <!-- Modern Blue -->
+    <color name="primaryVariant">#1E40AF</color> <!-- Darker Blue -->
+    <color name="secondaryColor">#0F766E</color> <!-- Teal -->
+    <color name="secondaryVariant">#115E59</color>
+    
+    <!-- Accent -->
+    <color name="accentColor">#F59E0B</color> <!-- Amber for highlights -->
 
-    <!-- Background / Text -->
+    <!-- Background / Surfaces -->
+    <color name="background">#F8FAFC</color> <!-- Slate 50 -->
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#EF4444</color>
+
+    <!-- Typography -->
+    <color name="black">#1E293B</color> <!-- Slate 900 (Softer black) -->
+    <color name="dark_gray">#475569</color> <!-- Slate 600 -->
+    <color name="light_gray">#94A3B8</color> <!-- Slate 400 -->
     <color name="white">#FFFFFF</color>
-    <color name="lightGray">#B0B0B0</color>
-    <color name="black">#000000</color>
 
-    <!-- Buttons -->
-    <color name="teal_700">#00796B</color>
-    <color name="purple_500">#9C27B0</color>
-    <color name="blue_500">#2196F3</color>
-    <color name="green_500">#4CAF50</color>
-    <color name="orange_500">#FF5722</color>
-    <color name="deep_orange_400">#FF7043</color>
-
-    <!-- Network Chip -->
-    <color name="red_400">#F44336</color>           <!-- Offline -->
-    <color name="green_400">#4CAF50</color>         <!-- Online -->
-
-    <!-- Typography helpers -->
-    <color name="dark_gray">#555555</color>
+    <!-- UI Elements -->
+    <color name="divider">#E2E8F0</color>
+    
+    <!-- Legacy compatibility (mapping to new palette where appropriate) -->
+    <color name="teal_700">@color/secondaryVariant</color>
+    <color name="purple_500">@color/primaryColor</color>
+    <color name="blue_500">@color/primaryColor</color>
+    <color name="green_500">#10B981</color>
+    <color name="orange_500">@color/accentColor</color>
+    <color name="deep_orange_400">#F97316</color>
+    
+    <color name="red_400">@color/error</color>
+    <color name="green_400">@color/green_500</color>
+    <color name="lightGray">@color/light_gray</color>
+    <color name="golden_dark_orange">@color/accentColor</color>
 </resources>

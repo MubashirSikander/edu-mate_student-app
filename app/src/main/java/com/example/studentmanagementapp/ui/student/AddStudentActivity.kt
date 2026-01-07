@@ -120,7 +120,9 @@ class AddStudentActivity : AppCompatActivity() {
             if (isEditMode) {
                 viewModel.updateStudent(student) {
                     Toast.makeText(this, "Student updated", Toast.LENGTH_SHORT).show()
-                    finish()
+                    com.example.studentmanagementapp.utils.AdManager.showInterstitial(this@AddStudentActivity) {
+                        finish()
+                    }
                 }
             } else {
                 viewModel.addStudent(
@@ -133,7 +135,9 @@ class AddStudentActivity : AppCompatActivity() {
                     student.isCR
                 ) {
                     Toast.makeText(this, "Student added", Toast.LENGTH_SHORT).show()
-                    finish()
+                    com.example.studentmanagementapp.utils.AdManager.showInterstitial(this@AddStudentActivity) {
+                        finish()
+                    }
                 }
             }
         }

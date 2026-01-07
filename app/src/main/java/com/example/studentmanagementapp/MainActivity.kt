@@ -4,6 +4,9 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +14,14 @@ import androidx.lifecycle.lifecycleScope
 import com.example.studentmanagementapp.databinding.ActivityMainBinding
 import com.example.studentmanagementapp.ui.attendance.MarkAttendanceActivity
 import com.example.studentmanagementapp.ui.attendance.ViewAttendanceActivity
+import com.example.studentmanagementapp.ui.auth.LoginActivity
 import com.example.studentmanagementapp.ui.course.AddCourseActivity
 import com.example.studentmanagementapp.ui.course.ViewCoursesActivity
 import com.example.studentmanagementapp.ui.student.AddStudentActivity
 import com.example.studentmanagementapp.ui.student.ViewStudentsActivity
 import com.example.studentmanagementapp.utils.DialogUtils
 import com.example.studentmanagementapp.utils.NetworkUtils
+import com.example.studentmanagementapp.viewmodel.AuthViewModel
 import com.example.studentmanagementapp.viewmodel.StudentViewModel
 import kotlinx.coroutines.launch
 
@@ -24,9 +29,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val studentViewModel: StudentViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!authViewModel.isLoggedIn()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         NetworkUtils.observeNetwork(this) { isOnline ->
@@ -67,20 +78,58 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, ViewAttendanceActivity::class.java))
         }
 
+        // Initialize Ads
+        com.example.studentmanagementapp.utils.AdManager.initialize(this)
+
+        binding.actionLogout.setOnClickListener {
+            authViewModel.logout()
+
+            com.example.studentmanagementapp.utils.AdManager.showInterstitial(this) {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+        }
+
+
         binding.btnSyncData.setOnClickListener {
             if (!NetworkUtils.isNetworkAvailable(this)) {
+                Log.d("SYNC_DEBUG", "No internet!")
                 DialogUtils.showNoInternetDialog(this)
                 return@setOnClickListener
             }
             lifecycleScope.launch {
+                Log.d("SYNC_DEBUG", "Starting sync...")
                 binding.btnSyncData.isEnabled = false
                 studentViewModel.syncNow { success ->
+                    Log.d("SYNC_DEBUG", "Sync finished, success = $success")
                     val message =
                         if (success) getString(R.string.sync_success) else getString(R.string.sync_failed)
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                     binding.btnSyncData.isEnabled = true
                 }
             }
+        }
+
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                authViewModel.logout()
+                com.example.studentmanagementapp.utils.AdManager.showInterstitial(this) {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

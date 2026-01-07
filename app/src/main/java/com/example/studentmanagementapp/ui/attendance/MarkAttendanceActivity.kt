@@ -18,6 +18,7 @@ import com.example.studentmanagementapp.data.entity.Enrollment
 import com.example.studentmanagementapp.data.repository.StudentRepository.AttendanceMarkPayload
 import com.example.studentmanagementapp.databinding.ActivityMarkAttendanceBinding
 import com.example.studentmanagementapp.utils.PdfUtils
+import com.example.studentmanagementapp.utils.NetworkUtils
 import com.example.studentmanagementapp.viewmodel.AttendanceViewModel
 import com.example.studentmanagementapp.viewmodel.CourseViewModel
 import com.example.studentmanagementapp.viewmodel.StudentViewModel
@@ -67,6 +68,9 @@ class MarkAttendanceActivity : AppCompatActivity() {
 
         binding.btnSaveAttendance.setOnClickListener { saveAttendance() }
         binding.btnGeneratePdf.setOnClickListener { generatePdf() }
+        binding.btnChangeCourse.setOnClickListener {
+            courseViewModel.courses.value?.let { showCourseSelectorBottomSheet(it) }
+        }
     }
 
     private fun showCourseSelectorBottomSheet(courses: List<Course>) {
@@ -78,9 +82,10 @@ class MarkAttendanceActivity : AppCompatActivity() {
         val rvCourses = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvCourses)
         rvCourses.layoutManager = LinearLayoutManager(this)
 
-        val adapter = CourseSelectAdapter(courses) { course ->
+        val courseAdapter = CourseSelectAdapter(courses) { course ->
             selectedCourse = course
             binding.tvSelectedCourse.text = "${course.courseName} (${course.courseCode})"
+            adapter.updateData(emptyList())
 
             // Update toolbar title immediately
             updateToolbarTitle(course.courseName)
@@ -93,7 +98,7 @@ class MarkAttendanceActivity : AppCompatActivity() {
             dialog.dismiss()
         }
 
-        rvCourses.adapter = adapter
+        rvCourses.adapter = courseAdapter
         dialog.show()
     }
 
@@ -122,6 +127,10 @@ class MarkAttendanceActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.select_course_prompt), Toast.LENGTH_SHORT).show()
             return
         }
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            Toast.makeText(this, getString(R.string.network_required), Toast.LENGTH_SHORT).show()
+            return
+        }
         val attendanceItems = adapter.getAttendance()
         if (attendanceItems.isEmpty()) {
             Toast.makeText(this, getString(R.string.no_students_to_mark), Toast.LENGTH_SHORT).show()
@@ -147,7 +156,10 @@ class MarkAttendanceActivity : AppCompatActivity() {
                     getString(R.string.attendance_saved_success, result.successCount),
                     Toast.LENGTH_SHORT
                 ).show()
-                finish()
+                resetSelections()
+                com.example.studentmanagementapp.utils.AdManager.showInterstitial(this@MarkAttendanceActivity) {
+                    finish()
+                }
             } else {
                 if (result.successCount > 0) {
                     updateToolbarSubtitle(attendanceTimestamp)
@@ -182,5 +194,11 @@ class MarkAttendanceActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    private fun resetSelections() {
+        val cleared = adapter.getAttendance().map { AttendanceItem(it.student, false) }
+        adapter.updateData(cleared)
+        supportActionBar?.subtitle = SimpleDateFormat("MMM dd, yyyy h:mma", Locale.getDefault()).format(Date())
     }
 }

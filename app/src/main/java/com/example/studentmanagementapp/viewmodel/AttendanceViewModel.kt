@@ -35,6 +35,15 @@ class AttendanceViewModel(application: Application) : AndroidViewModel(applicati
             repository.saveAttendanceBatch(courseId, payloads, Date(timestamp))
         }
     }
+    suspend fun getAttendanceForDate(
+        courseId: Long,
+        date: Long
+    ): List<Attendance> {
+        return withContext(Dispatchers.IO) {
+            repository.getAttendanceByCourseAndDate(courseId, Date(date))
+        }
+    }
+
 
     suspend fun getCourse(courseId: Long) = repository.getCourseById(courseId)
 

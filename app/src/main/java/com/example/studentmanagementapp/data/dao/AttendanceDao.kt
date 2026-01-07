@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.studentmanagementapp.data.entity.Attendance
+import java.util.Date
 
 @Dao
 interface AttendanceDao {
@@ -36,9 +37,29 @@ interface AttendanceDao {
         endOfDay: Long
     ): Attendance?
 
+    @Query("""
+    SELECT * FROM attendance
+    WHERE courseOwnerId = :courseId
+    AND date = :date
+""")
+    suspend fun getAttendanceByCourseAndDate(
+        courseId: Long,
+        date: Date
+    ): List<Attendance>
+
     @Update
     suspend fun update(attendance: Attendance)
 
     @Query("DELETE FROM attendance WHERE courseOwnerId = :courseId")
     suspend fun deleteAttendanceByCourse(courseId: Long)
+
+    @Query(
+        "SELECT * FROM attendance WHERE courseOwnerId = :courseId " +
+            "AND date BETWEEN :startOfDay AND :endOfDay ORDER BY date DESC"
+    )
+    suspend fun getAttendanceForCourseOnDate(
+        courseId: Long,
+        startOfDay: Long,
+        endOfDay: Long
+    ): List<Attendance>
 }

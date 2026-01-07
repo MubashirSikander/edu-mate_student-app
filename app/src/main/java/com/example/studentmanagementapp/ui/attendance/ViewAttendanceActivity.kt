@@ -59,8 +59,11 @@ class ViewAttendanceActivity : AppCompatActivity() {
         }
 
         binding.btnSelectCourse.setOnClickListener {
-            courseViewModel.courses.value?.let { showCourseSelectorBottomSheet(it) }
+            courseViewModel.courses.value?.let { courses ->
+                showCourseSelectorBottomSheet(courses)
+            }
         }
+
     }
 
     private fun showCourseSelectorBottomSheet(courses: List<Course>) {
